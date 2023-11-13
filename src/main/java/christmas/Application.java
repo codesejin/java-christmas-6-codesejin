@@ -25,5 +25,6 @@ public class Application {
         outputView.printDiscountHistories(discount);
         outputView.printTotalDiscount(discount);
         outputView.printFinalAmount(order, discount);
+        outputView.printBadge(discount);
     }
 }

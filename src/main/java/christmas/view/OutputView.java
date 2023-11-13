@@ -1,5 +1,6 @@
 package christmas.view;
 
+import christmas.domain.Badge;
 import christmas.domain.Discount;
 import christmas.domain.Gift;
 import christmas.domain.Order;
@@ -58,5 +59,11 @@ public class OutputView {
         System.out.println("\n<할인 후 예상 결제 금액>");
         int finalAmount = order.getOrderAmount() - discount.totalDiscountWithoutGift();
         System.out.println(String.format("%,d원",finalAmount));
+    }
+
+    public void printBadge(Discount discount) {
+        System.out.println("\n<12월 이벤트 배지>");
+        Badge badge = Badge.create(discount);
+        System.out.println(badge.getBadge());
     }
 }
