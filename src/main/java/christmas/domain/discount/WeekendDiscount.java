@@ -1,30 +1,33 @@
-package christmas.domain;
+package christmas.domain.discount;
+
+import christmas.domain.Order;
+import christmas.domain.VisitDay;
 
 import static christmas.domain.Menu.checkFoodType;
 import static christmas.utils.Constants.*;
 
-public class WeekDayDiscount {
+public class WeekendDiscount {
     private final String name;
     private final int discountAmount;
 
-    private WeekDayDiscount(Order order, VisitDay visitDay) {
-        this.name = "평일 할인";
+    private WeekendDiscount(Order order, VisitDay visitDay) {
+        this.name = "주말 할인";
         this.discountAmount = calculateDiscount(order, visitDay);
     }
 
-    public static WeekDayDiscount create(Order order, VisitDay visitDay) {
-        return new WeekDayDiscount(order, visitDay);
+    public static WeekendDiscount create(Order order, VisitDay visitDay) {
+        return new WeekendDiscount(order, visitDay);
     }
 
     public boolean isDiscountDay(VisitDay visitDay) {
-        return visitDay.getDayOfMonth() == VisitDay.DayType.WEEKDAY;
+        return visitDay.getDayOfMonth() == VisitDay.DayType.WEEKEND;
     }
 
     private int calculateDiscount(Order order, VisitDay visitDay) {
         int calculatedDiscountAmount = DEFAULT_AMOUNT;
 
         if (isDiscountDay(visitDay)) {
-            calculatedDiscountAmount = checkFoodType(order,DESSERT) * WEEK_DISCOUNT_PER_TYPE;
+            calculatedDiscountAmount = checkFoodType(order, MAIN) * WEEK_DISCOUNT_PER_TYPE;
         }
 
         return calculatedDiscountAmount;

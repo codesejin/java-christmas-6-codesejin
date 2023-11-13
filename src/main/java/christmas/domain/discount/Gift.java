@@ -1,4 +1,6 @@
-package christmas.domain;
+package christmas.domain.discount;
+
+import christmas.domain.Order;
 
 import static christmas.utils.Constants.*;
 

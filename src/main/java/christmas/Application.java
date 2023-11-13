@@ -1,7 +1,7 @@
 package christmas;
 
 import christmas.domain.Discount;
-import christmas.domain.Gift;
+import christmas.domain.discount.Gift;
 import christmas.domain.Order;
 import christmas.domain.VisitDay;
 import christmas.view.InputView;

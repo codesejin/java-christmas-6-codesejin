@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import christmas.domain.discount.*;
+
 public class Discount {
 
     private final DDayDiscount dDayDiscount;

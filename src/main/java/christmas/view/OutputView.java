@@ -2,7 +2,7 @@ package christmas.view;
 
 import christmas.domain.Badge;
 import christmas.domain.Discount;
-import christmas.domain.Gift;
+import christmas.domain.discount.Gift;
 import christmas.domain.Order;
 
 import java.util.Map;
