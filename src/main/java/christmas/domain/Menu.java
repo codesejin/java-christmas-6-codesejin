@@ -52,8 +52,7 @@ public enum Menu {
     }
 
     public static void checkMenuComposition(Map<String, Integer> orders) {
-        String drinkType = Menu.checkMenu(orders.keySet().iterator().next()).getType();
-
+        String drinkType = "drink";
         if (orders.keySet().stream().allMatch(menu -> Menu.checkMenu(menu).getType().equals(drinkType))) {
             throw new IllegalArgumentException(CHECK_ORDER_ONLY_DRINKS);
         }
