@@ -29,40 +29,40 @@ public class OutputView {
     }
 
     public void printDiscountHistories(Discount discount) {
-        System.out.println("\n<혜택 내역>");
+        System.out.println(DISCOUNT_HISTORIES);
         StringBuilder print = new StringBuilder();
         if (discount.getdDayDiscount().getDiscountAmount() != 0)
-            print.append(discount.getdDayDiscount().getName() + ": " + minusAmountFormat(discount.getdDayDiscount().getDiscountAmount())+LINE_BREAK);
+            print.append(discount.getdDayDiscount().getName() + COLON + minusAmountFormat(discount.getdDayDiscount().getDiscountAmount())+LINE_BREAK);
         if (discount.getWeekDayDiscount().getDiscountAmount() != 0)
-            print.append(discount.getWeekDayDiscount().getName() + ": " + minusAmountFormat(discount.getWeekDayDiscount().getDiscountAmount())+LINE_BREAK);
+            print.append(discount.getWeekDayDiscount().getName() + COLON + minusAmountFormat(discount.getWeekDayDiscount().getDiscountAmount())+LINE_BREAK);
         if (discount.getWeekendDiscount().getDiscountAmount() != 0)
-            print.append(discount.getWeekendDiscount().getName() + ": " + minusAmountFormat(discount.getWeekendDiscount().getDiscountAmount())+LINE_BREAK);
+            print.append(discount.getWeekendDiscount().getName() + COLON + minusAmountFormat(discount.getWeekendDiscount().getDiscountAmount())+LINE_BREAK);
         if (discount.getSpecialDiscount().getDiscountAmount() != 0)
-            print.append(discount.getSpecialDiscount().getName() + ": " + minusAmountFormat(discount.getSpecialDiscount().getDiscountAmount())+LINE_BREAK);
+            print.append(discount.getSpecialDiscount().getName() +COLON + minusAmountFormat(discount.getSpecialDiscount().getDiscountAmount())+LINE_BREAK);
         if (discount.getGift().getDiscountAmount() != 0)
-            print.append(discount.getGift().getName() + ": " + minusAmountFormat(discount.getGift().getDiscountAmount())+LINE_BREAK);
+            print.append(discount.getGift().getName() + COLON + minusAmountFormat(discount.getGift().getDiscountAmount())+LINE_BREAK);
         if (print.isEmpty())
             print.append(NOTHING);
         System.out.println(print.toString().trim());
     }
 
     public void printTotalDiscount(Discount discount) {
-        System.out.println("\n<총혜택 금액>");
+        System.out.println(TOTAL_DISCOUNT);
         System.out.println(minusAmountFormat(discount.totalDiscount()));
     }
 
     public String minusAmountFormat(int amount) {
-        return String.format("%,d원", amount * -1);
+        return String.format(AMOUNT, amount * -1);
     }
 
     public void printFinalAmount(Order order, Discount discount) {
-        System.out.println("\n<할인 후 예상 결제 금액>");
+        System.out.println(FINAL_AMOUNT);
         int finalAmount = order.getOrderAmount() - discount.totalDiscountWithoutGift();
-        System.out.println(String.format("%,d원",finalAmount));
+        System.out.println(String.format(AMOUNT,finalAmount));
     }
 
     public void printBadge(Discount discount) {
-        System.out.println("\n<12월 이벤트 배지>");
+        System.out.println(DECEMBER_BADGE);
         Badge badge = Badge.create(discount);
         System.out.println(badge.getBadge());
     }

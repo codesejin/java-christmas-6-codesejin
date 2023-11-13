@@ -6,7 +6,13 @@ public class Constants {
     public static final String OUTPUT_ORDER_LIST = "12월 3일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n\n<주문 메뉴>";
     public static final String TOTAL_ORDER_AMOUNT = "\n<할인 전 총주문 금액>";
     public static final String GIFT_DISCOUNT = "\n<증정 메뉴>";
+    public static final String DISCOUNT_HISTORIES = "\n<혜택 내역>";
+    public static final String TOTAL_DISCOUNT = "\n<총혜택 금액>";
+
+    public static final String FINAL_AMOUNT = "\n<할인 후 예상 결제 금액>";
+    public static final String DECEMBER_BADGE =  "\n<12월 이벤트 배지>";
     public static final String NOTHING = "없음";
+    public static final String COLON = ": ";
     public static final String AMOUNT = "%,d원";
     public static final String GIFT = "샴페인 1개";
     public static final String DESSERT = "dessert";
