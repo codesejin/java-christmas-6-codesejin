@@ -1,6 +1,6 @@
 package christmas.domain;
 
-import static christmas.utils.Constants.DEFAULT_AMOUNT;
+import static christmas.utils.Constants.*;
 
 public class DDayDiscount {
 
@@ -14,16 +14,16 @@ public class DDayDiscount {
     }
 
     private static int checkDuration(VisitDay visitDay) {
-        if (visitDay.getDate() > 25 || visitDay.getDate() < 1) return DEFAULT_AMOUNT;
+        if (visitDay.getDate() > CHRISTMAS_DAY || visitDay.getDate() < FIRST_DAY_OF_MONTH) return DEFAULT_AMOUNT;
         return calculateDiscount(visitDay.getDate());
     }
 
     private static int calculateDiscount(int dayOfMonth) {
-        int defaultDiscount = 1000;
-        int additionalDiscountPerDay = 100;
+        int defaultDiscount = DEFAULT_D_DAY_DISCOUNT;
+        int additionalDiscountPerDay = ADDITIONAL_DISCOUNT_PER_DAY;
 
-        int daysUntilChristmas = 25 - dayOfMonth + 1;
-        int totalDiscount = defaultDiscount + (25 - daysUntilChristmas) * additionalDiscountPerDay;
+        int daysUntilChristmas = CHRISTMAS_DAY - dayOfMonth + FIRST_DAY_OF_MONTH;
+        int totalDiscount = defaultDiscount + (CHRISTMAS_DAY - daysUntilChristmas) * additionalDiscountPerDay;
 
         return totalDiscount;
     }
