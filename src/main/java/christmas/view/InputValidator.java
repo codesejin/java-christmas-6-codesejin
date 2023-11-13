@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static christmas.domain.Menu.checkMenu;
+import static christmas.domain.Menu.checkMenuComposition;
 import static christmas.utils.Constants.MAX_NUMBER_IN_RANGE;
 import static christmas.utils.Constants.MIN_NUMBER_IN_RANGE;
 import static christmas.utils.ErrorMessages.*;
@@ -28,10 +29,12 @@ public class InputValidator {
         String[] eachOrder = input.split(",", -1);
         for (int i = 0; i < eachOrder.length; i++) {
             String[] order = checkOrderFormat(eachOrder[i].split("-"));
-            String menu = checkDuplicateMenu(orders, checkMenu(order[0]));
+            String menu = checkDuplicateMenu(orders, checkMenu(order[0]).getName());
             int count = checkOrderCntIsPositive(parseNumber(order[1],INPUT_ORDER_FORMAT));
             orders.put(menu, count);
         }
+        checkMenuComposition(orders);
+        checkTotalMenuCount(orders);
         return orders;
     }
 
@@ -48,5 +51,12 @@ public class InputValidator {
     public static int checkOrderCntIsPositive(int count) {
         if (count < 1) throw new IllegalArgumentException(INPUT_ORDER_FORMAT);
         return count;
+    }
+
+    private static void checkTotalMenuCount(Map<String, Integer> orders) {
+        int totalOrderCount = orders.values().stream().mapToInt(Integer::intValue).sum();
+        if (totalOrderCount > 20) {
+            throw new IllegalArgumentException("[ERROR] 주문된 메뉴의 총합이 20을 초과합니다.");
+        }
     }
 }

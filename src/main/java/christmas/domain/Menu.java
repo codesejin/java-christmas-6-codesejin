@@ -1,5 +1,7 @@
 package christmas.domain;
 
+import java.util.Map;
+
 import static christmas.utils.ErrorMessages.INPUT_ORDER_FORMAT;
 
 public enum Menu {
@@ -29,6 +31,10 @@ public enum Menu {
         this.price = price;
     }
 
+    public String getType() {
+        return type;
+    }
+
     public String getName() {
         return name;
     }
@@ -37,10 +43,18 @@ public enum Menu {
         return price;
     }
 
-    public static String checkMenu(String input) {
+    public static Menu checkMenu(String input) {
         for (Menu menu : values()) {
-            if (menu.name.equals(input)) return menu.name;
+            if (menu.name.equals(input)) return menu;
         }
         throw new IllegalArgumentException(INPUT_ORDER_FORMAT);
+    }
+
+    public static void checkMenuComposition(Map<String, Integer> orders) {
+        String drinkType = Menu.checkMenu(orders.keySet().iterator().next()).getType();
+
+        if (orders.keySet().stream().allMatch(menu -> Menu.checkMenu(menu).getType().equals(drinkType))) {
+            throw new IllegalArgumentException("[ERROR] 음료만 주문하실 수 없습니다.");
+        }
     }
 }
