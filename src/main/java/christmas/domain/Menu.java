@@ -57,4 +57,15 @@ public enum Menu {
             throw new IllegalArgumentException(CHECK_ORDER_ONLY_DRINKS);
         }
     }
+
+    public static int checkDessert(Order order) {
+        String dessertType = "dessert";
+        int dessertCnt = 0;
+        for (String menu : order.getOrder().keySet()) {
+            if (Menu.checkMenu(menu).getType().equals(dessertType)) {
+                dessertCnt += order.getOrder().get(menu);
+            }
+        }
+        return dessertCnt;
+    }
 }
