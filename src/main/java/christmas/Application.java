@@ -1,5 +1,6 @@
 package christmas;
 
+import christmas.domain.Gift;
 import christmas.domain.Order;
 import christmas.view.InputView;
 import christmas.view.OutputView;
@@ -16,5 +17,7 @@ public class Application {
         Order order = Order.create(stringIntegerMap);
         outputView.printMenu(order);
         outputView.printOrderAmountBeforeDiscount(order);
+        Gift gift = Gift.create(order);
+        outputView.printGift(gift);
     }
 }
