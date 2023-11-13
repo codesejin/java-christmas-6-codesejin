@@ -3,10 +3,11 @@ package christmas.domain;
 import static christmas.utils.Constants.*;
 
 public class DDayDiscount {
-
+    private final String name;
     private final int discountAmount;
 
     private DDayDiscount (VisitDay visitDay) {
+        this.name = "크리스마스 디데이 할인";
         this.discountAmount = checkDuration(visitDay);
     }
     public static DDayDiscount create (VisitDay visitDay) {
@@ -26,6 +27,10 @@ public class DDayDiscount {
         int totalDiscount = defaultDiscount + (CHRISTMAS_DAY - daysUntilChristmas) * additionalDiscountPerDay;
 
         return totalDiscount;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public int getDiscountAmount() {

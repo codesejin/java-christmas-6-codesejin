@@ -3,11 +3,12 @@ package christmas.domain;
 import static christmas.utils.Constants.*;
 
 public class Gift {
-
+    private final String name;
     private final String gift;
     private final int discountAmount;
 
     private Gift(Order order) {
+        this.name = "증정 이벤트";
         this.gift = checkGift(order);
         this.discountAmount = checkAmount(order);
     }
@@ -24,6 +25,10 @@ public class Gift {
     public int checkAmount(Order order) {
         if (order.getOrderAmount() >= GIFT_POSSIBLE_AMOUNT) return GIFT_AMOUNT;
         return DEFAULT_AMOUNT;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getGift() {
