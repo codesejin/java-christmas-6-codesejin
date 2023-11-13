@@ -18,7 +18,7 @@ public class InputValidator {
         }
     }
 
-    public static int checkNumberInRange(int date) {
+    public static int checkDateNumberInRange(int date) {
         if (date < MIN_NUMBER_IN_RANGE || date > MAX_NUMBER_IN_RANGE) throw new IllegalArgumentException(INPUT_DATE_FORMAT);
         return date;
     }

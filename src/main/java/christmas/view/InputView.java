@@ -13,7 +13,7 @@ public class InputView {
             try {
                 System.out.println("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)");
                 String input = Console.readLine();
-                return checkNumberInRange(parseNumber(input,INPUT_DATE_FORMAT));
+                return checkDateNumberInRange(parseNumber(input,INPUT_DATE_FORMAT));
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
