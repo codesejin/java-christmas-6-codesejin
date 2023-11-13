@@ -1,7 +1,7 @@
 package christmas.domain;
 
 import static christmas.domain.Menu.checkFoodType;
-import static christmas.utils.Constants.DEFAULT_AMOUNT;
+import static christmas.utils.Constants.*;
 
 public class WeekendDiscount {
     private int discountAmount;
@@ -22,7 +22,7 @@ public class WeekendDiscount {
         int calculatedDiscountAmount = DEFAULT_AMOUNT;
 
         if (isDiscountDay(visitDay)) {
-            calculatedDiscountAmount = checkFoodType(order, "main") * 2023;
+            calculatedDiscountAmount = checkFoodType(order, MAIN) * WEEK_DISCOUNT_PER_TYPE;
         }
 
         return calculatedDiscountAmount;

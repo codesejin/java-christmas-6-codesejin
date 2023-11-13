@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static christmas.utils.Constants.DEFAULT_AMOUNT;
+import static christmas.utils.Constants.WEEK_DISCOUNT_PER_TYPE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WeekDayDiscountTest {
@@ -23,7 +24,7 @@ class WeekDayDiscountTest {
         VisitDay weekdayVisitDay = VisitDay.create(4);// 월요일
         WeekDayDiscount weekDayDiscount = WeekDayDiscount.create(order, weekdayVisitDay);
 
-        assertThat(weekDayDiscount.getDiscountAmount()).isEqualTo(1 * 2023);
+        assertThat(weekDayDiscount.getDiscountAmount()).isEqualTo(1 * WEEK_DISCOUNT_PER_TYPE);
     }
     @Test
     @DisplayName("평일 할인 - 평일에 디저트 2개 주문했을 경우 ( 디저트 1개당 2023원할인 )")
@@ -35,7 +36,7 @@ class WeekDayDiscountTest {
         VisitDay weekdayVisitDay = VisitDay.create(3);// 일요일
         WeekDayDiscount weekDayDiscount = WeekDayDiscount.create(order, weekdayVisitDay);
 
-        assertThat(weekDayDiscount.getDiscountAmount()).isEqualTo(2 * 2023);
+        assertThat(weekDayDiscount.getDiscountAmount()).isEqualTo(2 * WEEK_DISCOUNT_PER_TYPE);
     }
 
     @Test
