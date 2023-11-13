@@ -21,6 +21,8 @@ public class Application {
         outputView.printOrderAmountBeforeDiscount(order);
         Gift gift = Gift.create(order);
         outputView.printGift(gift);
-        outputView.printDiscountHistories(Discount.create(order,visitDay));
+        Discount discount = Discount.create(order, visitDay);
+        outputView.printDiscountHistories(discount);
+        outputView.printTotalDiscount(discount);
     }
 }

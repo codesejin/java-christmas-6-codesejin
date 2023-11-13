@@ -31,19 +31,24 @@ public class OutputView {
         System.out.println("\n<혜택 내역>");
         StringBuilder print = new StringBuilder();
         if (discount.getdDayDiscount().getDiscountAmount() != 0)
-            print.append(discount.getdDayDiscount().getName() + ": " + format(discount.getdDayDiscount().getDiscountAmount()));
+            print.append(discount.getdDayDiscount().getName() + ": " + minusAmountFormat(discount.getdDayDiscount().getDiscountAmount()));
         if (discount.getWeekDayDiscount().getDiscountAmount() != 0)
-            print.append(discount.getWeekDayDiscount().getName() + ": " + format(discount.getWeekDayDiscount().getDiscountAmount()));
+            print.append(discount.getWeekDayDiscount().getName() + ": " + minusAmountFormat(discount.getWeekDayDiscount().getDiscountAmount()));
         if (discount.getWeekendDiscount().getDiscountAmount() != 0)
-            print.append(discount.getWeekendDiscount().getName() + ": " + format(discount.getWeekendDiscount().getDiscountAmount()));
+            print.append(discount.getWeekendDiscount().getName() + ": " + minusAmountFormat(discount.getWeekendDiscount().getDiscountAmount()));
         if (discount.getSpecialDiscount().getDiscountAmount() != 0)
-            print.append(discount.getSpecialDiscount().getName() + ": " + format(discount.getSpecialDiscount().getDiscountAmount()));
+            print.append(discount.getSpecialDiscount().getName() + ": " + minusAmountFormat(discount.getSpecialDiscount().getDiscountAmount()));
         if (discount.getGift().getDiscountAmount() != 0)
-            print.append(discount.getGift().getName() + ": " + format(discount.getGift().getDiscountAmount()));
+            print.append(discount.getGift().getName() + ": " + minusAmountFormat(discount.getGift().getDiscountAmount()));
         System.out.println(print);
     }
 
-    public String format(int amount) {
+    public void printTotalDiscount(Discount discount) {
+        System.out.println("<총혜택 금액>");
+        System.out.println(minusAmountFormat(discount.totalDiscount()));
+    }
+
+    public String minusAmountFormat(int amount) {
         return String.format("%,d원\n", amount * -1);
     }
 }

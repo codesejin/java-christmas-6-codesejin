@@ -21,11 +21,11 @@ public class Discount {
     }
 
     public int totalDiscount() {
-        return -1 * (dDayDiscount.getDiscountAmount() +
+        return dDayDiscount.getDiscountAmount() +
                 weekDayDiscount.getDiscountAmount()+
                 weekendDiscount.getDiscountAmount()+
                 specialDiscount.getDiscountAmount() +
-                gift.getDiscountAmount());
+                gift.getDiscountAmount();
     }
 
     public DDayDiscount getdDayDiscount() {
