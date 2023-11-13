@@ -2,11 +2,10 @@ package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
 
-import java.util.HashMap;
 import java.util.Map;
 
-import static christmas.view.InputValidator.checkNumberInRange;
-import static christmas.view.InputValidator.parseNumber;
+import static christmas.utils.ErrorMessages.INPUT_DATE_FORMAT;
+import static christmas.view.InputValidator.*;
 
 public class InputView {
     public int readDate() {
@@ -14,7 +13,7 @@ public class InputView {
             try {
                 System.out.println("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)");
                 String input = Console.readLine();
-                return checkNumberInRange(parseNumber(input));
+                return checkNumberInRange(parseNumber(input,INPUT_DATE_FORMAT));
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
@@ -32,17 +31,5 @@ public class InputView {
                 System.out.println(e.getMessage());
             }
         }
-    }
-
-    private static Map<String, Integer> checkOrders(String input) {
-        Map<String, Integer> orders = new HashMap<>();
-        String[] split = input.split(",", -1);
-        for (int i = 0; i < split.length; i++) {
-            String[] order = split[i].split("-");
-            String menu = order[0];
-            int count = parseNumber(order[1]);
-            orders.put(menu, count);
-        }
-        return orders;
     }
 }
