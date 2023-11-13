@@ -53,4 +53,10 @@ public class OutputView {
     public String minusAmountFormat(int amount) {
         return String.format("%,d원", amount * -1);
     }
+
+    public void printFinalAmount(Order order, Discount discount) {
+        System.out.println("\n<할인 후 예상 결제 금액>");
+        int finalAmount = order.getOrderAmount() - discount.totalDiscountWithoutGift();
+        System.out.println(String.format("%,d원",finalAmount));
+    }
 }

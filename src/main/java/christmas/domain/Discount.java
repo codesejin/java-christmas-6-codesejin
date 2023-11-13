@@ -28,6 +28,13 @@ public class Discount {
                 gift.getDiscountAmount();
     }
 
+    public int totalDiscountWithoutGift() {
+        return dDayDiscount.getDiscountAmount() +
+                weekDayDiscount.getDiscountAmount()+
+                weekendDiscount.getDiscountAmount()+
+                specialDiscount.getDiscountAmount();
+    }
+
     public DDayDiscount getdDayDiscount() {
         return dDayDiscount;
     }

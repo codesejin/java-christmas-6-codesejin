@@ -24,5 +24,6 @@ public class Application {
         Discount discount = Discount.create(order, visitDay);
         outputView.printDiscountHistories(discount);
         outputView.printTotalDiscount(discount);
+        outputView.printFinalAmount(order, discount);
     }
 }
