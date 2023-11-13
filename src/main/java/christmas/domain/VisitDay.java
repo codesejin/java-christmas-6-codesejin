@@ -3,8 +3,8 @@ package christmas.domain;
 import java.time.LocalDate;
 
 public class VisitDay {
-    private int date;
-    private DayType dayOfMonth;
+    private final int date;
+    private final DayType dayOfMonth;
 
     private VisitDay(int date) {
         this.date = date;

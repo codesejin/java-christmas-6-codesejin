@@ -5,8 +5,8 @@ import java.util.Map;
 
 public class Order {
 
-    private Map<String, Integer> order;
-    private int orderAmount;
+    private final Map<String, Integer> order;
+    private final int orderAmount;
 
     private Order(Map<String, Integer> order) {
         this.order = order;

@@ -4,7 +4,7 @@ import static christmas.domain.Menu.checkFoodType;
 import static christmas.utils.Constants.*;
 
 public class WeekendDiscount {
-    private int discountAmount;
+    private final int discountAmount;
 
     private WeekendDiscount(Order order, VisitDay visitDay) {
         this.discountAmount = calculateDiscount(order, visitDay);

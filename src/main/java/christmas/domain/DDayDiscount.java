@@ -4,7 +4,7 @@ import static christmas.utils.Constants.*;
 
 public class DDayDiscount {
 
-    private int discountAmount;
+    private final int discountAmount;
 
     private DDayDiscount (VisitDay visitDay) {
         this.discountAmount = checkDuration(visitDay);

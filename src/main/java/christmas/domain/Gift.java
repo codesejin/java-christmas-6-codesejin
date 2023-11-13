@@ -4,8 +4,8 @@ import static christmas.utils.Constants.*;
 
 public class Gift {
 
-    private String gift;
-    private int discountAmount;
+    private final String gift;
+    private final int discountAmount;
 
     private Gift(Order order) {
         this.gift = checkGift(order);
