@@ -7,8 +7,6 @@ import christmas.domain.discount.Gift;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
-import java.util.Map;
-
 import static christmas.utils.ViewMessages.EVENT_BENEFIT_MESSAGE;
 import static christmas.utils.ViewMessages.PROMOTION_START_MESSAGE;
 
@@ -16,8 +14,8 @@ public class Promotion {
 
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
-
     private InitDto initDto;
+
     public void start() {
         System.out.println(PROMOTION_START_MESSAGE);
         VisitDay visitDay = inputView.readDate();
