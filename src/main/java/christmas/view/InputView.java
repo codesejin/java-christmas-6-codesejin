@@ -5,9 +5,10 @@ import christmas.domain.VisitDay;
 
 import java.util.Map;
 
-import static christmas.utils.Constants.INPUT_DATE_GUIDE;
-import static christmas.utils.Constants.INPUT_ORDER_GUIDE;
+
 import static christmas.utils.ErrorMessages.INPUT_DATE_FORMAT;
+import static christmas.utils.ViewMessages.INPUT_DATE_GUIDE;
+import static christmas.utils.ViewMessages.INPUT_ORDER_GUIDE;
 import static christmas.view.InputValidator.*;
 
 public class InputView {

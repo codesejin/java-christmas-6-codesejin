@@ -8,6 +8,7 @@ import christmas.domain.Order;
 import java.util.Map;
 
 import static christmas.utils.Constants.*;
+import static christmas.utils.ViewMessages.*;
 
 public class OutputView {
 
