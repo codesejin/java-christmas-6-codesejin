@@ -17,12 +17,12 @@ public class OutputView {
     }
 
     public void printOrderAmountBeforeDiscount(Order order) {
-        System.out.println("\n<할인 전 총주문 금액>");
-        System.out.println(String.format("%,d원", order.getOrderAmount()));
+        System.out.println(TOTAL_ORDER_AMOUNT);
+        System.out.println(String.format(AMOUNT, order.getOrderAmount()));
     }
 
     public void printGift(Gift gift) {
-        System.out.println("\n<증정 메뉴>");
+        System.out.println(GIFT_DISCOUNT);
         System.out.println(gift.getGift());
     }
 }
