@@ -1,15 +1,22 @@
 package christmas.view;
 
+import christmas.domain.Order;
+
 import java.util.Map;
 
 import static christmas.utils.Constants.*;
 
 public class OutputView {
 
-    public void printMenu(Map<String,Integer> stringIntegerMap) {
+    public void printMenu(Order order) {
         System.out.println(OUTPUT_ORDER_LIST);
-        for (Map.Entry<String,Integer> entry : stringIntegerMap.entrySet()) {
+        for (Map.Entry<String,Integer> entry : order.getOrder().entrySet()) {
             System.out.println(entry.getKey() + BLANK + entry.getValue() + COUNT);
         }
+    }
+
+    public void printOrderAmountBeforeDiscount(Order order) {
+        System.out.println("\n<할인 전 총주문 금액>");
+        System.out.println(String.format("%,d원", order.getOrderAmount()));
     }
 }

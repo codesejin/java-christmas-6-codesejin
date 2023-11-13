@@ -1,5 +1,6 @@
 package christmas;
 
+import christmas.domain.Order;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
@@ -12,6 +13,8 @@ public class Application {
         OutputView outputView = new OutputView();
         inputView.readDate();
         Map<String, Integer> stringIntegerMap = inputView.readOrders();
-        outputView.printMenu(stringIntegerMap);
+        Order order = Order.create(stringIntegerMap);
+        outputView.printMenu(order);
+        outputView.printOrderAmountBeforeDiscount(order);
     }
 }
