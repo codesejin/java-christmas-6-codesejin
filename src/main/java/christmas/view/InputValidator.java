@@ -27,16 +27,26 @@ public class InputValidator {
         Map<String, Integer> orders = new HashMap<>();
         String[] eachOrder = input.split(",", -1);
         for (int i = 0; i < eachOrder.length; i++) {
-            String[] order = eachOrder[i].split("-");
-            checkOrderFormat(order);
-            String menu = checkMenu(order[0]);
-            int count = parseNumber(order[1],INPUT_ORDER_FORMAT);
+            String[] order = checkOrderFormat(eachOrder[i].split("-"));
+            String menu = checkDuplicateMenu(orders, checkMenu(order[0]));
+            int count = checkOrderCntIsPositive(parseNumber(order[1],INPUT_ORDER_FORMAT));
             orders.put(menu, count);
         }
         return orders;
     }
 
-    public static void checkOrderFormat(String[] order) {
+    public static String[] checkOrderFormat(String[] order) {
         if (order.length < 2) throw new IllegalArgumentException(INPUT_ORDER_FORMAT);
+        return order;
+    }
+
+    public static String checkDuplicateMenu(Map<String,Integer> orders, String menu) {
+        if (orders.containsKey(menu)) throw new IllegalArgumentException(INPUT_ORDER_FORMAT);
+        return menu;
+    }
+
+    public static int checkOrderCntIsPositive(int count) {
+        if (count < 1) throw new IllegalArgumentException(INPUT_ORDER_FORMAT);
+        return count;
     }
 }
