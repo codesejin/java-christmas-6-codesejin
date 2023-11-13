@@ -27,6 +27,7 @@ public class Constants {
     public static final String ORDERS_DELIMITER = ",";
     public static final String ORDER_DELIMITER = "-";
     public static final String BLANK = " ";
+    public static final String LINE_BREAK = "\n";
     public static final String COUNT = "개";
 
 }
