@@ -1,6 +1,7 @@
 package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import christmas.domain.Order;
 import christmas.domain.VisitDay;
 
 import java.util.Map;
@@ -25,13 +26,12 @@ public class InputView {
         }
     }
 
-    public static Map<String, Integer> readOrders() {
+    public Order readOrders() {
         while (true) {
             try {
                 System.out.println(INPUT_ORDER_GUIDE);
                 String input = Console.readLine();
-                Map<String, Integer> orders = checkOrders(input);
-                return orders;
+                return Order.create(checkOrders(input));
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
