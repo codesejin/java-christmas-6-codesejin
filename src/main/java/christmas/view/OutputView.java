@@ -32,19 +32,23 @@ public class OutputView {
     public void printDiscountHistories(Discount discount) {
         System.out.println(DISCOUNT_HISTORIES);
         StringBuilder print = new StringBuilder();
-        if (discount.getdDayDiscount().getDiscountAmount() != 0)
-            print.append(discount.getdDayDiscount().getName() + COLON + minusAmountFormat(discount.getdDayDiscount().getDiscountAmount())+LINE_BREAK);
-        if (discount.getWeekDayDiscount().getDiscountAmount() != 0)
-            print.append(discount.getWeekDayDiscount().getName() + COLON + minusAmountFormat(discount.getWeekDayDiscount().getDiscountAmount())+LINE_BREAK);
-        if (discount.getWeekendDiscount().getDiscountAmount() != 0)
-            print.append(discount.getWeekendDiscount().getName() + COLON + minusAmountFormat(discount.getWeekendDiscount().getDiscountAmount())+LINE_BREAK);
-        if (discount.getSpecialDiscount().getDiscountAmount() != 0)
-            print.append(discount.getSpecialDiscount().getName() +COLON + minusAmountFormat(discount.getSpecialDiscount().getDiscountAmount())+LINE_BREAK);
-        if (discount.getGift().getDiscountAmount() != 0)
-            print.append(discount.getGift().getName() + COLON + minusAmountFormat(discount.getGift().getDiscountAmount())+LINE_BREAK);
+
+        appendDiscountHistory(print, discount.getdDayDiscount().getName(),discount.getdDayDiscount().getDiscountAmount());
+        appendDiscountHistory(print, discount.getWeekDayDiscount().getName(), discount.getWeekDayDiscount().getDiscountAmount());
+        appendDiscountHistory(print, discount.getWeekendDiscount().getName(), discount.getWeekendDiscount().getDiscountAmount());
+        appendDiscountHistory(print, discount.getSpecialDiscount().getName(),discount.getSpecialDiscount().getDiscountAmount());
+        appendDiscountHistory(print, discount.getGift().getName(),discount.getGift().getDiscountAmount());
+
         if (print.isEmpty())
             print.append(NOTHING);
+
         System.out.println(print.toString().trim());
+    }
+
+    private void appendDiscountHistory(StringBuilder print, String discountType, int discountAmount) {
+        if (discountAmount != 0) {
+            print.append(discountType + COLON + minusAmountFormat(discountAmount) + LINE_BREAK);
+        }
     }
 
     public void printTotalDiscount(Discount discount) {
