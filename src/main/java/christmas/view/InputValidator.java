@@ -5,8 +5,7 @@ import java.util.Map;
 
 import static christmas.domain.Menu.checkMenu;
 import static christmas.domain.Menu.checkMenuComposition;
-import static christmas.utils.Constants.MAX_NUMBER_IN_RANGE;
-import static christmas.utils.Constants.MIN_NUMBER_IN_RANGE;
+import static christmas.utils.Constants.*;
 import static christmas.utils.ErrorMessages.*;
 
 public class InputValidator {
@@ -26,9 +25,9 @@ public class InputValidator {
 
     public static Map<String, Integer> checkOrders(String input) {
         Map<String, Integer> orders = new HashMap<>();
-        String[] eachOrder = input.split(",", -1);
+        String[] eachOrder = input.split(ORDERS_DELIMITER, -1);
         for (int i = 0; i < eachOrder.length; i++) {
-            String[] order = checkOrderFormat(eachOrder[i].split("-"));
+            String[] order = checkOrderFormat(eachOrder[i].split(ORDER_DELIMITER));
             String menu = checkDuplicateMenu(orders, checkMenu(order[0]).getName());
             int count = checkOrderCntIsPositive(parseNumber(order[1],INPUT_ORDER_FORMAT));
             orders.put(menu, count);
@@ -39,7 +38,7 @@ public class InputValidator {
     }
 
     public static String[] checkOrderFormat(String[] order) {
-        if (order.length < 2) throw new IllegalArgumentException(INPUT_ORDER_FORMAT);
+        if (order.length < ONE_ORDER_FORMAT_SIZE) throw new IllegalArgumentException(INPUT_ORDER_FORMAT);
         return order;
     }
 
@@ -49,14 +48,14 @@ public class InputValidator {
     }
 
     public static int checkOrderCntIsPositive(int count) {
-        if (count < 1) throw new IllegalArgumentException(INPUT_ORDER_FORMAT);
+        if (count < MIN_ORDER_COUNT_NUMBER) throw new IllegalArgumentException(INPUT_ORDER_FORMAT);
         return count;
     }
 
     private static void checkTotalMenuCount(Map<String, Integer> orders) {
         int totalOrderCount = orders.values().stream().mapToInt(Integer::intValue).sum();
-        if (totalOrderCount > 20) {
-            throw new IllegalArgumentException("[ERROR] 주문된 메뉴의 총합이 20을 초과합니다.");
+        if (totalOrderCount > MAX_ORDER_COUNT_NUMBER) {
+            throw new IllegalArgumentException(CHECK_MAX_ORDER_COUNT_MAX);
         }
     }
 }

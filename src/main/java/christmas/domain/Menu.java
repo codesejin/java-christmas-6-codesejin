@@ -2,6 +2,7 @@ package christmas.domain;
 
 import java.util.Map;
 
+import static christmas.utils.ErrorMessages.CHECK_ORDER_ONLY_DRINKS;
 import static christmas.utils.ErrorMessages.INPUT_ORDER_FORMAT;
 
 public enum Menu {
@@ -54,7 +55,7 @@ public enum Menu {
         String drinkType = Menu.checkMenu(orders.keySet().iterator().next()).getType();
 
         if (orders.keySet().stream().allMatch(menu -> Menu.checkMenu(menu).getType().equals(drinkType))) {
-            throw new IllegalArgumentException("[ERROR] 음료만 주문하실 수 없습니다.");
+            throw new IllegalArgumentException(CHECK_ORDER_ONLY_DRINKS);
         }
     }
 }
