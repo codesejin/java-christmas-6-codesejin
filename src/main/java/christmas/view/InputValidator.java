@@ -3,6 +3,7 @@ package christmas.view;
 import java.util.HashMap;
 import java.util.Map;
 
+import static christmas.domain.Menu.checkMenu;
 import static christmas.utils.Constants.MAX_NUMBER_IN_RANGE;
 import static christmas.utils.Constants.MIN_NUMBER_IN_RANGE;
 import static christmas.utils.ErrorMessages.*;
@@ -28,7 +29,7 @@ public class InputValidator {
         for (int i = 0; i < eachOrder.length; i++) {
             String[] order = eachOrder[i].split("-");
             checkOrderFormat(order);
-            String menu = order[0];
+            String menu = checkMenu(order[0]);
             int count = parseNumber(order[1],INPUT_ORDER_FORMAT);
             orders.put(menu, count);
         }
