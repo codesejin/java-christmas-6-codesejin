@@ -5,9 +5,13 @@ import christmas.domain.Order;
 import christmas.domain.VisitDay;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import static christmas.utils.Constants.DEFAULT_AMOUNT;
 import static christmas.utils.Constants.WEEK_DISCOUNT_PER_TYPE;
@@ -16,86 +20,52 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class WeekDiscountTest {
 
-    @Test
-    @DisplayName("calculateDiscount 메서드 - 평일에 디저트 주문 안했을 경우")
-    public void calculateDiscount_NoDessertOnWeekday() {
-        Map<String, Integer> orderItems = new HashMap<>();
-        orderItems.put("타파스", 1);
-        orderItems.put("레드와인", 1);
-        Order order = Order.create(orderItems);
+    private static final int WEEKDAY = 4; // 월요일
+    private static final int WEEKEND = 2; // 토요일
 
-        VisitDay weekdayVisitDay = VisitDay.create(4);// 월요일
-
-        int amount = WeekDiscount.calculateDiscount(order, weekdayVisitDay, VisitDay.DayType.WEEKDAY, Menu.MenuType.DESSERT);
-        assertThat(amount).isEqualTo(DEFAULT_AMOUNT);
+    @ParameterizedTest
+    @DisplayName("calculateDiscount 메서드 - 평일에 디저트 주문 테스트")
+    @MethodSource("weekdayDessertParameters")
+    public void calculateDiscount_WeekdayDessertTest(String menuName, int quantity, int expectedAmount) {
+        testCalculator(WEEKDAY, Menu.MenuType.DESSERT, menuName, quantity, expectedAmount);
     }
 
-    @Test
-    @DisplayName("calculateDiscount 메서드 - 평일에 디저트 1개 주문했을 경우")
-    public void calculateDiscount_1DessertOnWeekday() {
-        Map<String, Integer> orderItems = new HashMap<>();
-        orderItems.put("아이스크림", 1);
-        orderItems.put("타파스", 1);
-        orderItems.put("레드와인", 1);
-        Order order = Order.create(orderItems);
-
-        VisitDay weekdayVisitDay = VisitDay.create(4);// 월요일
-
-        int amount = WeekDiscount.calculateDiscount(order, weekdayVisitDay, VisitDay.DayType.WEEKDAY, Menu.MenuType.DESSERT);
-        assertThat(amount).isEqualTo(WEEK_DISCOUNT_PER_TYPE);
+    private static Stream<Object[]> weekdayDessertParameters() {
+        return Stream.of(
+                new Object[]{"타파스", 1, DEFAULT_AMOUNT},
+                new Object[]{"아이스크림", 1, WEEK_DISCOUNT_PER_TYPE},
+                new Object[]{"초코케이크", 3, 3 * WEEK_DISCOUNT_PER_TYPE}
+        );
+    }
+    @ParameterizedTest
+    @DisplayName("calculateDiscount 메서드 - 주말에 메인 주문 테스트")
+    @MethodSource("weekendMainParameters")
+    public void calculateDiscount_WeekendMainTest(String menuName, int quantity, int expectedAmount) {
+        testCalculator(WEEKEND, Menu.MenuType.MAIN, menuName, quantity, expectedAmount);
     }
 
-    @Test
-    @DisplayName("calculateDiscount 메서드 - 평일에 디저트 3개 주문했을 경우")
-    public void calculateDiscount_3DessertOnWeekday() {
-        Map<String, Integer> orderItems = new HashMap<>();
-        orderItems.put("아이스크림", 3);
-        orderItems.put("타파스", 1);
-        orderItems.put("레드와인", 1);
-        Order order = Order.create(orderItems);
-
-        VisitDay weekdayVisitDay = VisitDay.create(4);// 월요일
-
-        int amount = WeekDiscount.calculateDiscount(order, weekdayVisitDay, VisitDay.DayType.WEEKDAY, Menu.MenuType.DESSERT);
-        assertThat(amount).isEqualTo(3 * WEEK_DISCOUNT_PER_TYPE);
+    private static Stream<Object[]> weekendMainParameters() {
+        return Stream.of(
+                new Object[]{"타파스", 1, DEFAULT_AMOUNT},
+                new Object[]{"해산물파스타", 1, WEEK_DISCOUNT_PER_TYPE},
+                new Object[]{"바비큐립", 3, 3 * WEEK_DISCOUNT_PER_TYPE}
+        );
     }
 
-    @Test
-    @DisplayName("calculateDiscount 메서드 - 주말에 메인 주문 안했을 경우")
-    public void calculateDiscount_NoMainOnWeekend() {
+    private void testCalculator(int dayOfMonth, Menu.MenuType menuType, String itemName, int quantity, int expectedAmount) {
         Map<String, Integer> orderItems = new HashMap<>();
-        orderItems.put("타파스", 1);
+        orderItems.put(itemName, quantity);
         Order order = Order.create(orderItems);
 
-        VisitDay weekend = VisitDay.create(2);// 토요일
+        VisitDay visitDay = VisitDay.create(dayOfMonth);
 
-        int amount = WeekDiscount.calculateDiscount(order, weekend, VisitDay.DayType.WEEKEND, Menu.MenuType.MAIN);
-        assertThat(amount).isEqualTo(DEFAULT_AMOUNT);
+        int amount = WeekDiscount.calculateDiscount(order, visitDay, getDayType(dayOfMonth), menuType);
+        assertThat(amount).isEqualTo(expectedAmount);
     }
 
-    @Test
-    @DisplayName("calculateDiscount 메서드 - 주말에 메인 주문 1개 했을 경우")
-    public void calculateDiscount_1MainOnWeekend() {
-        Map<String, Integer> orderItems = new HashMap<>();
-        orderItems.put("해산물파스타", 1);
-        Order order = Order.create(orderItems);
+    private VisitDay.DayType getDayType(int dayOfMonth) {
+        if (dayOfMonth == WEEKDAY) return VisitDay.DayType.WEEKDAY;
+        return VisitDay.DayType.WEEKEND;
 
-        VisitDay weekend = VisitDay.create(2);// 토요일
-
-        int amount = WeekDiscount.calculateDiscount(order, weekend, VisitDay.DayType.WEEKEND, Menu.MenuType.MAIN);
-        assertThat(amount).isEqualTo(WEEK_DISCOUNT_PER_TYPE);
-    }
-
-    @Test
-    @DisplayName("calculateDiscount 메서드 - 주말에 메인 주문 3개 했을 경우")
-    public void calculateDiscount_3MainOnWeekend() {
-        Map<String, Integer> orderItems = new HashMap<>();
-        orderItems.put("바비큐립", 3);
-        Order order = Order.create(orderItems);
-
-        VisitDay weekend = VisitDay.create(2);// 토요일
-
-        int amount = WeekDiscount.calculateDiscount(order, weekend, VisitDay.DayType.WEEKEND, Menu.MenuType.MAIN);
-        assertThat(amount).isEqualTo(3 * WEEK_DISCOUNT_PER_TYPE);
     }
 }
