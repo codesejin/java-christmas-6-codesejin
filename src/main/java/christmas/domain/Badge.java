@@ -1,7 +1,9 @@
 package christmas.domain;
 
-import static christmas.domain.BadgeType.*;
-import static christmas.utils.Constants.*;
+import static christmas.domain.BadgeType.STAR;
+import static christmas.domain.BadgeType.TREE;
+import static christmas.domain.BadgeType.SANTA;
+import static christmas.utils.Constants.NOTHING;
 
 public class Badge {
     private final String badge;
