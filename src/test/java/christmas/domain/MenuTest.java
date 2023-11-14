@@ -67,23 +67,24 @@ class MenuTest {
         );
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("checkMenuType - 특정 메뉴 타입의 주문 수량 확인")
-    void checkMenuType_OrderQuantity() {
-        Map<String, Integer> orderItems = new HashMap<>();
-        orderItems.put("레드와인", 3);
-        orderItems.put("바비큐립", 2);
-        orderItems.put("아이스크림", 1);
-
-        Order order = Order.create(orderItems);
-
-        int drinkQuantity = Menu.checkMenuType(order, Menu.MenuType.DRINK);
-        int mainQuantity = Menu.checkMenuType(order, Menu.MenuType.MAIN);
-        int dessertQuantity = Menu.checkMenuType(order, Menu.MenuType.DESSERT);
+    @MethodSource("VariousMenu")
+    void checkMenuType_OrderQuantity(Map<String, Integer> order) {
+        Order orders = Order.create(order);
+        int drinkQuantity = Menu.checkMenuType(orders, Menu.MenuType.DRINK);
+        int mainQuantity = Menu.checkMenuType(orders, Menu.MenuType.MAIN);
+        int dessertQuantity = Menu.checkMenuType(orders, Menu.MenuType.DESSERT);
 
         assertThat(drinkQuantity).isEqualTo(3);
         assertThat(mainQuantity).isEqualTo(2);
         assertThat(dessertQuantity).isEqualTo(1);
+    }
+
+    static Stream<Map<String, Integer>> VariousMenu() {
+        return Stream.of(
+                createOrderMap("레드와인","3","바비큐립","2","아이스크림", "1")
+        );
     }
 
     @Test
