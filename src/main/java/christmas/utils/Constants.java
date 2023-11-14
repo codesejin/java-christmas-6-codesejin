@@ -6,7 +6,7 @@ public class Constants {
     public static final String AMOUNT = "%,d원";
     public static final String GIFT = "샴페인 1개";
     public static final int FIRST_DAY_OF_MONTH = 1;
-    public static final int DEFAULT_D_DAY_DISCOUNT = 1000;
+    public static final int THOUSAND_WON = 1000;
     public static final int ADDITIONAL_DISCOUNT_PER_DAY = 100;
     public static final int CHRISTMAS_DAY = 25;
     public static final int GIFT_AMOUNT = 25000;

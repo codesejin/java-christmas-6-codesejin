@@ -5,9 +5,8 @@ import christmas.domain.VisitDay;
 import static christmas.utils.Constants.CHRISTMAS_DAY;
 import static christmas.utils.Constants.FIRST_DAY_OF_MONTH;
 import static christmas.utils.Constants.DEFAULT_AMOUNT;
-import static christmas.utils.Constants.DEFAULT_D_DAY_DISCOUNT;
 import static christmas.utils.Constants.ADDITIONAL_DISCOUNT_PER_DAY;
-
+import static christmas.utils.Constants.THOUSAND_WON;
 public class DDayDiscount {
     private final String name;
     private final int discountAmount;
@@ -26,7 +25,7 @@ public class DDayDiscount {
     }
 
     private static int calculateDiscount(int dayOfMonth) {
-        int defaultDiscount = DEFAULT_D_DAY_DISCOUNT;
+        int defaultDiscount = THOUSAND_WON;
         int additionalDiscountPerDay = ADDITIONAL_DISCOUNT_PER_DAY;
 
         int daysUntilChristmas = CHRISTMAS_DAY - dayOfMonth + FIRST_DAY_OF_MONTH;

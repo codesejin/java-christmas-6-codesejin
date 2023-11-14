@@ -5,6 +5,7 @@ import christmas.domain.VisitDay;
 import java.util.List;
 
 import static christmas.utils.Constants.DEFAULT_AMOUNT;
+import static christmas.utils.Constants.THOUSAND_WON;
 
 public class SpecialDiscount {
     private final String name;
@@ -21,7 +22,7 @@ public class SpecialDiscount {
     }
 
     public int checkDiscountDay(VisitDay visitDay) {
-        if (starDay.contains(visitDay.getDate())) return 1000;
+        if (starDay.contains(visitDay.getDate())) return THOUSAND_WON;
         return DEFAULT_AMOUNT;
     }
 
