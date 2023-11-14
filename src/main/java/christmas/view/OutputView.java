@@ -53,7 +53,7 @@ public class OutputView {
 
     public void printTotalDiscount(Discount discount) {
         System.out.println(TOTAL_DISCOUNT);
-        System.out.println(minusAmountFormat(discount.totalDiscount()));
+        System.out.println(minusAmountFormat(discount.totalDiscountWithGift()));
     }
 
     public String minusAmountFormat(int amount) {

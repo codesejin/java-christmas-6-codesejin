@@ -40,6 +40,6 @@ class DiscountTest {
     @DisplayName("총 할인 가격이 얼마인지 테스트")
     public void totalDiscount() {
         Discount discount = Discount.create(order, visitDay);
-        assertThat(discount.totalDiscount()).isEqualTo(6246);
+        assertThat(discount.totalDiscountWithGift()).isEqualTo(6246);
     }
 }

@@ -13,9 +13,9 @@ public class Badge {
     }
 
     public String checkBadge(Discount discount) {
-        if (discount.totalDiscount() >= 5000 && discount.totalDiscount() < 10000) return "별";
-        if (discount.totalDiscount() >= 10000 && discount.totalDiscount() < 20000) return "트리";
-        if (discount.totalDiscount() >= 20000) return "산타";
+        if (discount.totalDiscountWithGift() >= 5000 && discount.totalDiscountWithGift() < 10000) return "별";
+        if (discount.totalDiscountWithGift() >= 10000 && discount.totalDiscountWithGift() < 20000) return "트리";
+        if (discount.totalDiscountWithGift() >= 20000) return "산타";
         return NOTHING;
     }
 

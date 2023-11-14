@@ -22,12 +22,8 @@ public class Discount {
         return new Discount(order,visitDay);
     }
 
-    public int totalDiscount() {
-        return dDayDiscount.getDiscountAmount() +
-                weekDayDiscount.getDiscountAmount()+
-                weekendDiscount.getDiscountAmount()+
-                specialDiscount.getDiscountAmount() +
-                gift.getDiscountAmount();
+    public int totalDiscountWithGift() {
+        return totalDiscountWithoutGift() + gift.getDiscountAmount();
     }
 
     public int totalDiscountWithoutGift() {
