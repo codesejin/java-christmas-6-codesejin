@@ -2,7 +2,11 @@ package christmas.domain.discount;
 
 import christmas.domain.Order;
 
-import static christmas.utils.Constants.*;
+import static christmas.utils.Constants.GIFT_POSSIBLE_AMOUNT;
+import static christmas.utils.Constants.GIFT;
+import static christmas.utils.Constants.NOTHING;
+import static christmas.utils.Constants.GIFT_AMOUNT;
+import static christmas.utils.Constants.DEFAULT_AMOUNT;
 
 public class Gift {
     private final String name;
