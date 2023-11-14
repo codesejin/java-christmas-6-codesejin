@@ -4,10 +4,8 @@ import christmas.domain.Menu;
 import christmas.domain.Order;
 import christmas.domain.VisitDay;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -52,6 +50,15 @@ class WeekDiscountTest {
         );
     }
 
+    @ParameterizedTest
+    @DisplayName("isDiscountDay - 주말인지 평일인지 검증")
+    @MethodSource("discountDayParameters")
+    public void isDiscountDay(int dayOfMonth, VisitDay.DayType discountDay, boolean expectedResult) {
+        VisitDay visitDay = VisitDay.create(dayOfMonth);
+        boolean result = WeekDiscount.isDiscountDay(visitDay, discountDay);
+        assertThat(result).isEqualTo(expectedResult);
+    }
+
     private void testCalculator(int dayOfMonth, Menu.MenuType menuType, String itemName, int quantity, int expectedAmount) {
         Map<String, Integer> orderItems = new HashMap<>();
         orderItems.put(itemName, quantity);
@@ -67,5 +74,16 @@ class WeekDiscountTest {
         if (dayOfMonth == WEEKDAY) return VisitDay.DayType.WEEKDAY;
         return VisitDay.DayType.WEEKEND;
 
+    }
+
+    private static Stream<Object[]> discountDayParameters() {
+        return Stream.of(
+                new Object[]{1, VisitDay.DayType.WEEKDAY, false},
+                new Object[]{1, VisitDay.DayType.WEEKEND, true},
+                new Object[]{2, VisitDay.DayType.WEEKDAY, false},
+                new Object[]{2, VisitDay.DayType.WEEKEND, true},
+                new Object[]{7, VisitDay.DayType.WEEKDAY, true},
+                new Object[]{7, VisitDay.DayType.WEEKEND, false}
+        );
     }
 }
