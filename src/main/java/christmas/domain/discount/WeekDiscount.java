@@ -15,7 +15,7 @@ public class WeekDiscount {
         this.discountAmount = calculateDiscount(order, visitDay, discountDay, menuType);
     }
 
-    public int calculateDiscount(Order order, VisitDay visitDay, VisitDay.DayType discountDay, Menu.MenuType menuType) {
+    public static int calculateDiscount(Order order, VisitDay visitDay, VisitDay.DayType discountDay, Menu.MenuType menuType) {
         int calculatedDiscountAmount = DEFAULT_AMOUNT;
         if (isDiscountDay(visitDay, discountDay)) {
             calculatedDiscountAmount = checkMenuType(order, menuType) * WEEK_DISCOUNT_PER_TYPE;
