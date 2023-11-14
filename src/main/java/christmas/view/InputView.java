@@ -4,13 +4,12 @@ import camp.nextstep.edu.missionutils.Console;
 import christmas.domain.Order;
 import christmas.domain.VisitDay;
 
-import java.util.Map;
-
-
 import static christmas.utils.ErrorMessages.INPUT_DATE_FORMAT;
 import static christmas.utils.ViewMessages.INPUT_DATE_GUIDE;
 import static christmas.utils.ViewMessages.INPUT_ORDER_GUIDE;
-import static christmas.view.InputValidator.*;
+import static christmas.view.InputValidator.checkDateNumberInRange;
+import static christmas.view.InputValidator.parseNumber;
+import static christmas.view.InputValidator.checkOrders;
 
 public class InputView {
     public VisitDay readDate() {
