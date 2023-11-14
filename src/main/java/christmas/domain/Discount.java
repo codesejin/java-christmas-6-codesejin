@@ -1,6 +1,10 @@
 package christmas.domain;
 
-import christmas.domain.discount.*;
+import christmas.domain.discount.DDayDiscount;
+import christmas.domain.discount.WeekDayDiscount;
+import christmas.domain.discount.WeekendDiscount;
+import christmas.domain.discount.SpecialDiscount;
+import christmas.domain.discount.Gift;
 
 public class Discount {
 
