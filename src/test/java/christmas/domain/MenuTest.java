@@ -67,6 +67,47 @@ class MenuTest {
         );
     }
 
+    @Test
+    @DisplayName("checkMenuType - 특정 메뉴 타입의 주문 수량 확인")
+    void checkMenuType_OrderQuantity() {
+        Map<String, Integer> orderItems = new HashMap<>();
+        orderItems.put("레드와인", 3);
+        orderItems.put("바비큐립", 2);
+        orderItems.put("아이스크림", 1);
+
+        Order order = Order.create(orderItems);
+
+        int drinkQuantity = Menu.checkMenuType(order, Menu.MenuType.DRINK);
+        int mainQuantity = Menu.checkMenuType(order, Menu.MenuType.MAIN);
+        int dessertQuantity = Menu.checkMenuType(order, Menu.MenuType.DESSERT);
+
+        assertThat(drinkQuantity).isEqualTo(3);
+        assertThat(mainQuantity).isEqualTo(2);
+        assertThat(dessertQuantity).isEqualTo(1);
+    }
+
+    @Test
+    @DisplayName("checkMenuType - 특정 메뉴 타입의 주문 수량 확인 - 주문이 없을 경우")
+    void checkMenuType_NoOrder() {
+        Map<String, Integer> orderItems = new HashMap<>();
+        Order order = Order.create(orderItems);
+
+        int drinkQuantity = Menu.checkMenuType(order, Menu.MenuType.DRINK);
+        assertThat(drinkQuantity).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("checkMenuType - 특정 메뉴 타입의 주문 수량 확인 - 주문과 동일한 메뉴 타입이 아닐 경우")
+    void checkMenuType_NoOrderForType() {
+        Map<String, Integer> orderItems = new HashMap<>();
+        orderItems.put("타파스", 2);
+        Order order = Order.create(orderItems);
+
+        int drinkQuantity = Menu.checkMenuType(order, Menu.MenuType.DRINK);
+
+        assertThat(drinkQuantity).isEqualTo(0);
+    }
+
     private static Map<String, Integer> createOrderMap(String... items) {
         if (items.length % 2 != 0) {
             throw new IllegalArgumentException("[ERROR] 인자는 Key-value로 쌍이어야 합니다.(menu, quantity).");
@@ -80,57 +121,5 @@ class MenuTest {
         }
 
         return orderItems;
-    }
-    @Test
-    @DisplayName("checkMenuType - 특정 메뉴 타입의 주문 수량 확인")
-    void checkMenuType_OrderQuantity() {
-        Map<String, Integer> orderItems = new HashMap<>();
-        orderItems.put("레드와인", 3);
-        orderItems.put("바비큐립", 2);
-        orderItems.put("아이스크림", 1);
-
-        Order order = Order.create(orderItems);
-
-        int drinkQuantity = Menu.checkMenuType(order, Menu.MenuType.DRINK);
-        int dessertQuantity = Menu.checkMenuType(order, Menu.MenuType.DESSERT);
-
-        assertThat(drinkQuantity).isEqualTo(3);
-        assertThat(dessertQuantity).isEqualTo(1);
-    }
-
-    @Test
-    @DisplayName("checkMenuType - 특정 메뉴 타입의 주문 수량 확인 - 주문이 없을 경우")
-    void checkMenuType_NoOrder() {
-        Map<String, Integer> orderItems = new HashMap<>();
-        Order order = Order.create(orderItems);
-
-        int drinkQuantity = Menu.checkMenuType(order, Menu.MenuType.DRINK);
-
-        assertThat(drinkQuantity).isEqualTo(0);
-    }
-
-    @Test
-    @DisplayName("checkMenuType - 특정 메뉴 타입의 주문 수량 확인 - 주문이 없는 메뉴 타입일 경우")
-    void checkMenuType_NoOrderForType() {
-        Map<String, Integer> orderItems = new HashMap<>();
-        orderItems.put("타파스", 2);
-        Order order = Order.create(orderItems);
-
-        int drinkQuantity = Menu.checkMenuType(order, Menu.MenuType.DRINK);
-
-        assertThat(drinkQuantity).isEqualTo(0);
-    }
-
-    @Test
-    @DisplayName("checkMenuType - 특정 메뉴 타입의 주문 수량 확인 - 주문이 있는 메뉴 타입일 경우")
-    void checkMenuType_OrderForType() {
-        Map<String, Integer> orderItems = new HashMap<>();
-        orderItems.put("타파스", 2);
-        orderItems.put("제로콜라", 1);
-        Order order = Order.create(orderItems);
-
-        int drinkQuantity = Menu.checkMenuType(order, Menu.MenuType.DRINK);
-
-        assertThat(drinkQuantity).isEqualTo(1);
     }
 }
