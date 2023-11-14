@@ -2,6 +2,7 @@ package christmas.domain;
 
 import java.util.Map;
 
+import static christmas.utils.Constants.DRINK;
 import static christmas.utils.ErrorMessages.CHECK_ORDER_ONLY_DRINKS;
 import static christmas.utils.ErrorMessages.INPUT_ORDER_FORMAT;
 
@@ -52,19 +53,15 @@ public enum Menu {
     }
 
     public static void checkMenuComposition(Map<String, Integer> orders) {
-        String drinkType = "drink";
-        if (orders.keySet().stream().allMatch(menu -> Menu.checkMenu(menu).getType().equals(drinkType))) {
+        if (orders.keySet().stream().allMatch(menu -> Menu.checkMenu(menu).getType().equals(DRINK))) {
             throw new IllegalArgumentException(CHECK_ORDER_ONLY_DRINKS);
         }
     }
 
     public static int checkMenuType(Order order, String type) {
-        int dessertCnt = 0;
-        for (String menu : order.getOrder().keySet()) {
-            if (Menu.checkMenu(menu).getType().equals(type)) {
-                dessertCnt += order.getOrder().get(menu);
-            }
-        }
-        return dessertCnt;
+        return order.getOrder().keySet().stream()
+                .filter(menu -> Menu.checkMenu(menu).getType().equals(type))
+                .mapToInt(menu -> order.getOrder().get(menu))
+                .sum();
     }
 }
