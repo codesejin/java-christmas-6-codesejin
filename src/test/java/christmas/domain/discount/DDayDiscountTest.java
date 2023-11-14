@@ -1,7 +1,6 @@
 package christmas.domain.discount;
 
 import christmas.domain.VisitDay;
-import christmas.domain.discount.DDayDiscount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
