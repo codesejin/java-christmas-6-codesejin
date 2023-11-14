@@ -1,6 +1,7 @@
 package christmas.domain;
 
-import static christmas.utils.Constants.NOTHING;
+import static christmas.domain.BadgeType.*;
+import static christmas.utils.Constants.*;
 
 public class Badge {
     private final String badge;
@@ -15,9 +16,9 @@ public class Badge {
     public String checkBadge(Discount discount) {
         int totalDiscount = discount.totalDiscountWithGift();
 
-        if (isInRange(totalDiscount, 5000, 10000)) return "별";
-        if (isInRange(totalDiscount, 10000, 20000)) return "트리";
-        if (totalDiscount >= 20000) return "산타";
+        if (isInRange(totalDiscount, STAR.getBadgeLimit(), TREE.getBadgeLimit())) return STAR.getName();
+        if (isInRange(totalDiscount, TREE.getBadgeLimit(), SANTA.getBadgeLimit())) return TREE.getName();
+        if (totalDiscount >= SANTA.getBadgeLimit()) return SANTA.getName();
         return NOTHING;
     }
 
