@@ -26,9 +26,13 @@ public class Promotion {
     public void running() {
         System.out.println(EVENT_BENEFIT_MESSAGE);
         outputView.printMenu(initDto.getOrder());
+        Discount discount = Discount.create(initDto.getOrder(), initDto.getVisitDay());
+        displayPromotionDetails(initDto, discount);
+    }
+
+    private void displayPromotionDetails(InitDto initDto, Discount discount) {
         outputView.printOrderAmountBeforeDiscount(initDto.getOrder());
         outputView.printGift(Gift.create(initDto.getOrder()));
-        Discount discount = Discount.create(initDto.getOrder(), initDto.getVisitDay());
         outputView.printDiscountHistories(discount);
         outputView.printTotalDiscount(discount);
         outputView.printFinalAmount(initDto.getOrder(), discount);
