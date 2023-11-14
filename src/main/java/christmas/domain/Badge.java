@@ -13,10 +13,16 @@ public class Badge {
     }
 
     public String checkBadge(Discount discount) {
-        if (discount.totalDiscountWithGift() >= 5000 && discount.totalDiscountWithGift() < 10000) return "별";
-        if (discount.totalDiscountWithGift() >= 10000 && discount.totalDiscountWithGift() < 20000) return "트리";
-        if (discount.totalDiscountWithGift() >= 20000) return "산타";
+        int totalDiscount = discount.totalDiscountWithGift();
+
+        if (isInRange(totalDiscount, 5000, 10000)) return "별";
+        if (isInRange(totalDiscount, 10000, 20000)) return "트리";
+        if (totalDiscount >= 20000) return "산타";
         return NOTHING;
+    }
+
+    private boolean isInRange(int value, int start, int end) {
+        return value >= start && value < end;
     }
 
     public String getBadge() {
