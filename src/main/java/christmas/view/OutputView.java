@@ -7,8 +7,19 @@ import christmas.domain.Order;
 
 import java.util.Map;
 
-import static christmas.utils.Constants.*;
-import static christmas.utils.ViewMessages.*;
+import static christmas.utils.Constants.BLANK;
+import static christmas.utils.Constants.COUNT;
+import static christmas.utils.Constants.AMOUNT;
+import static christmas.utils.Constants.NOTHING;
+import static christmas.utils.Constants.COLON;
+import static christmas.utils.Constants.LINE_BREAK;
+import static christmas.utils.ViewMessages.OUTPUT_ORDER_LIST;
+import static christmas.utils.ViewMessages.TOTAL_ORDER_AMOUNT;
+import static christmas.utils.ViewMessages.GIFT_DISCOUNT;
+import static christmas.utils.ViewMessages.DISCOUNT_HISTORIES;
+import static christmas.utils.ViewMessages.TOTAL_DISCOUNT;
+import static christmas.utils.ViewMessages.FINAL_AMOUNT;
+import static christmas.utils.ViewMessages.DECEMBER_BADGE;
 
 public class OutputView {
 
