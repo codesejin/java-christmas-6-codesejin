@@ -1,16 +1,15 @@
 package christmas.domain.discount;
 
+import christmas.domain.Menu;
 import christmas.domain.Order;
 import christmas.domain.VisitDay;
-
-import static christmas.utils.Constants.DESSERT;
 
 
 public class WeekDayDiscount extends WeekDiscount {
     private final String name;
 
     private WeekDayDiscount(Order order, VisitDay visitDay) {
-        super(order, visitDay,VisitDay.DayType.WEEKDAY, DESSERT);
+        super(order, visitDay,VisitDay.DayType.WEEKDAY, Menu.MenuType.DESSERT);
         this.name = "평일 할인";
     }
 

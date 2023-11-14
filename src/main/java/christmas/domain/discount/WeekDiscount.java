@@ -1,5 +1,6 @@
 package christmas.domain.discount;
 
+import christmas.domain.Menu;
 import christmas.domain.Order;
 import christmas.domain.VisitDay;
 
@@ -10,18 +11,18 @@ import static christmas.utils.Constants.WEEK_DISCOUNT_PER_TYPE;
 public class WeekDiscount {
     private int discountAmount;
 
-    public WeekDiscount(Order order, VisitDay visitDay, VisitDay.DayType discountDay, String MenuType) {
-        this.discountAmount = calculateDiscount(order, visitDay, discountDay, MenuType);
+    public WeekDiscount(Order order, VisitDay visitDay, VisitDay.DayType discountDay, Menu.MenuType menuType) {
+        this.discountAmount = calculateDiscount(order, visitDay, discountDay, menuType);
     }
 
-    public static WeekDiscount create(Order order, VisitDay visitDay, VisitDay.DayType discountDay, String MenuType) {
-        return new WeekDiscount(order, visitDay, discountDay, MenuType);
+    public static WeekDiscount create(Order order, VisitDay visitDay, VisitDay.DayType discountDay, Menu.MenuType menuType) {
+        return new WeekDiscount(order, visitDay, discountDay, menuType);
     }
 
-    private int calculateDiscount(Order order, VisitDay visitDay, VisitDay.DayType discountDay, String MenuType) {
+    private int calculateDiscount(Order order, VisitDay visitDay, VisitDay.DayType discountDay, Menu.MenuType menuType) {
         int calculatedDiscountAmount = DEFAULT_AMOUNT;
         if (isDiscountDay(visitDay, discountDay)) {
-            calculatedDiscountAmount = checkMenuType(order, MenuType) * WEEK_DISCOUNT_PER_TYPE;
+            calculatedDiscountAmount = checkMenuType(order, menuType) * WEEK_DISCOUNT_PER_TYPE;
         }
         return calculatedDiscountAmount;
     }
