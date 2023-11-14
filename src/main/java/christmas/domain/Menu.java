@@ -58,7 +58,7 @@ public enum Menu {
         }
     }
 
-    public static int checkFoodType(Order order, String type) {
+    public static int checkMenuType(Order order, String type) {
         int dessertCnt = 0;
         for (String menu : order.getOrder().keySet()) {
             if (Menu.checkMenu(menu).getType().equals(type)) {

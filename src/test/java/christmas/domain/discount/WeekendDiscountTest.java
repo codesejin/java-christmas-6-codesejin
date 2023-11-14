@@ -37,7 +37,6 @@ class WeekendDiscountTest {
 
         VisitDay weekdayVisitDay = VisitDay.create(1);// 금요일
         WeekendDiscount weekendDiscount = WeekendDiscount.create(order, weekdayVisitDay);
-
         assertThat(weekendDiscount.getDiscountAmount()).isEqualTo(2 * WEEK_DISCOUNT_PER_TYPE);
     }
 
